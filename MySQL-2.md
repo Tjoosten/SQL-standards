@@ -100,3 +100,18 @@ MySQL-2 Optimalization guide
 - Test all suspect queries in a development environment where you have mirrored production data.
 
 ## MySQL Backup Procedures:
+
+- Backup from secondary replicated server.
+- Stop replication during backups to prevent inconsistencies on data dependencies and foreign constraints.
+- Stop MySQL altogether and take a backup of the database files.
+- Backup binary logs at same time as dumpfile if MySQL dump used – to make sure replication does not break.
+- Do not trust an LVM snapshot for backups – this could create data inconsistencies that will give you issues in the future.
+- Make dumps per table for easier single table recovery – if data is isolated from other tables.
+- Use –opt when using mysqldump.
+- Check and Optimize tables before a backup.
+- When importing temporarily disable foreign constraints for a faster import.
+- When importing temporarily disable unique checks for a faster import.
+- Calculate size of database/tables data and indexes after each backup to monitor growth.
+- Monitor slave replication for errors and delay with a cron script.
+- Perform Backups regularly.
+- Test your backups regularly.
