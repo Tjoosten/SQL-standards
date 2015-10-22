@@ -10,3 +10,7 @@ document this
 document this
 
 ## MySQL Schema Optimization:
+
+document this 
+
+## MySQL Backup Procedures:
