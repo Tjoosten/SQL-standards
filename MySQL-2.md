@@ -3,8 +3,8 @@ MySQL-2 Optimalization guide
 
 ## MySQL Server Hardware and OS Tuning:
 
-<document this>
+document this
 
 ## MySQL Configuration:
 
-<document this>
+document this
