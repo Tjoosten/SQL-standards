@@ -48,6 +48,28 @@ MySQL-2 Optimalization guide
 
 ## MySQL Schema Optimization:
 
-document this 
+- Keep your database trim.
+- Archive old data – to remove excessive row returns or searches on queries.
+- Put indexes on your data.
+- Do not overuse indexes, compare with your queries.
+- Compress text and blob data types – to save space and reduce number of disk reads.
+- UTF 8 and UTF16 is slower than latin1.
+- Use Triggers sparingly.
+- Keep redundant data to a minimum – do not duplicate data unnecessarily.
+- Use linking tables rather than extending rows.
+- Pay attention to your data types, use the smallest one possible for your real data.
+- Separate blob/text data from other data if other data is often used for queries when blob/text are not.
+- Check and optimize tables often.
+- Rewrite InnoDB tables often to optimize.
+- Sometimes, it is faster to drop indexes when adding columns and then add indexes back.
+- Use different storage engines for different needs.
+- Use ARCHIVE storage engine for Logging tables or Auditing tables – this is much more efficient for writes.
+- Store session data in memcache rather than MySQL – memcache allows for auto-expiring values and prevents you from having to create costly reads and writes to MySQL for temporal data.
+- Use VARCHAR instead CHAR when storing variable length strings – to save space since CHAR is fixed length and VARCHAR is not (utf8 is not affected by this).
+- Make schema changes incrementally – a small change can have drastic effects.
+- Test all schema changes in a development environment that mirrors production.
+- Do NOT arbitrarily change values in your config file, it can have disastrous affects.
+- Sometimes less is more in MySQL configs.
+- When in doubt use a generic MySQL config file.
 
 ## MySQL Backup Procedures:
