@@ -8,3 +8,5 @@ document this
 ## MySQL Configuration:
 
 document this
+
+## MySQL Schema Optimization:
