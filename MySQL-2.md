@@ -72,4 +72,31 @@ MySQL-2 Optimalization guide
 - Sometimes less is more in MySQL configs.
 - When in doubt use a generic MySQL config file.
 
+### Query optimalization.
+
+- Use the slow query log to find slow queries.
+- Use EXPLAIN to determine queries are functioning appropriately.
+- Test your queries often to see if they are performing optimally – performance will change over time.
+- Avoid count(*) on entire tables, it can lock the entire table.
+- Make queries uniform so subsequent similar queries will use query cache.
+- Use GROUP BY instead of DISTINCT when appropriate.
+- Use indexed columns in WHERE, GROUP BY, and ORDER BY clauses.
+- Keep indexes simple, do not reuse a column in multiple indexes.
+- Sometimes MySQL chooses the wrong index, use USE INDEX for this case
+- Check for issues using SQL_MODE=STRICT.
+- Use a LIMIT on UNION instead of OR for less than 5 indexed fields.
+- Use INSERT ON DUPLICATE KEY or INSERT IGNORE instead of UPDATE to avoid the SELECT prior to update.
+- Use a indexed field and ORDER BY instead of MAX.
+- Avoid using ORDER BY RAND().
+- LIMIT M,N can actually slow down queries in certain circumstances, use sparingly.
+- Use UNION instead of sub-queries in WHERE clauses.
+- For UPDATES, use SHARE MODE to prevent exclusive locks.
+- On restarts of MySQL, remember to warm your database, to ensure that your data is in memory and queries are fast.
+- Use DROP TABLE then CREATE TABLE instead of DELETE FROM to remove all data from a table.
+- Minimize the data in your query to only the data you need, using * is overkill most of the time.
+- Consider persistent connections instead of multiple connections to reduce overhead.
+- Benchmark queries, including using load on the server, sometimes a simple query can have affects on other queries.
+- When load increases on your server, use SHOW PROCESSLIST to view slow/problematic queries.
+- Test all suspect queries in a development environment where you have mirrored production data.
+
 ## MySQL Backup Procedures:
