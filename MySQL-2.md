@@ -30,7 +30,21 @@ MySQL-2 Optimalization guide
 
 ## MySQL Configuration:
 
-document this
+- Use innodb_flush_method=O_DIRECT to avoid a double buffer when writing.
+- Avoid O_DIRECT and EXT3 filesystem – you will serialize all your writes.
+- Allocate enough innodb_buffer_pool_size to load your entire InnoDB file into memory – less reads from disk.
+- Do not make innodb_log_file_size too big, with faster and more disks – flushing more often is good and lowers the recovery time during crashes.
+- Do not mix innodb_thread_concurrency and thread_concurrency variables – these two values are not compatible.
+- Allocate a minimal amount for max_connections – too many connections can use up your RAM and lock up your MySQL server.
+- Keep thread_cache at a relatively high number, about 16 – to prevent slowness when opening connections.
+- Use  skip-name-resolve – to remove dns lookups.
+- Use query cache if your queries are repetitive and your data does not change often – however using query cache on data that changes often will give you a performance hit.
+- Increase temp_table_size – to prevent disk writes.
+- Increase max_heap_table_size – to prevent disk writes.
+- Do not set your sort_buffer_size too high – this is per connection and can use up memory fast.
+- Monitor key_read_requests and key_reads to determine your key_buffer size – the key read requests should be higher than your key_reads, otherwise you are not efficiently using your key_buffer
+- Set innodb_flush_log_at_trx_commit = 0 will improve performance, but leaving it to default (1), you will ensure data integrity, you will also ensure replication is not lagging
+- Have a test environment where you can test your configs and restart often, without affecting production.
 
 ## MySQL Schema Optimization:
 
